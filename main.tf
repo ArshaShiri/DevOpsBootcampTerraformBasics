@@ -9,12 +9,18 @@ provider "aws" {
 
 resource "aws_vpc" "development-vpc" {
     cidr_block = "10.0.0.0/16"
+    tags = {
+        Name: "development"
+    }
 }
 
 resource "aws_subnet" "dev-subnet-1" {
     vpc_id = aws_vpc.development-vpc.id
     cidr_block = "10.0.0.0/24"
     availability_zone = "eu-central-1a"
+    tags = {
+        Name: "subnet-1-development"
+    }
 }
 
 # Used to query stuff
@@ -29,4 +35,7 @@ resource "aws_subnet" "dev-subnet-2" {
     # from the default vps and then taking the next subnet
     cidr_block = "172.31.48.0/20"
     availability_zone = "eu-central-1a"
+    tags = {
+        Name: "subnet-2-development"
+    }
 }
