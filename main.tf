@@ -39,3 +39,12 @@ resource "aws_subnet" "dev-subnet-2" {
         Name: "subnet-2-development"
     }
 }
+
+# For each attribute an output can be defined
+output "dev-vpc-id" {
+    value = aws_vpc.development-vpc.id
+}
+
+output "dev-subnet-id" {
+    value = aws_subnet.dev-subnet-1.id
+}
