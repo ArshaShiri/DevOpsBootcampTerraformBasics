@@ -3,6 +3,7 @@ provider "aws" {
     region = "eu-central-1"
 
     # Do not hardcode the credentials here!
+    # Use environment vars
     access_key = ""
     secret_key = ""
 }
