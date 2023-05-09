@@ -7,16 +7,16 @@ provider "aws" {
     secret_key = ""
 }
 
-variable "subnet_cidr_block" {
-    description = "subnet cidr block"
+# variable "subnet_cidr_block" {
+#     description = "subnet cidr block"
+# 
+#     # Is used when no value can be found defined.
+#     default = "10.0.10.0/24"
+#     type = string
+# }
 
-    # Is used when no value can be found defined.
-    default = "10.0.10.0/24"
-    type = string
-}
-
-variable "vpc_cidr_block" {
-    description = "vpc cidr block"
+variable "cidr_blocks" {
+    description = "cidr blocks for vpc subnets"
 }
 
 variable "environment" {
@@ -24,7 +24,7 @@ variable "environment" {
 }
 
 resource "aws_vpc" "development-vpc" {
-    cidr_block = var.vpc_cidr_block
+    cidr_block = var.cidr_blocks[0]
     tags = {
         Name: "development"
     }
@@ -32,7 +32,7 @@ resource "aws_vpc" "development-vpc" {
 
 resource "aws_subnet" "dev-subnet-1" {
     vpc_id = aws_vpc.development-vpc.id
-    cidr_block = var.subnet_cidr_block
+    cidr_block = var.cidr_blocks[1]
     availability_zone = "eu-central-1a"
     tags = {
         Name: "subnet-1-development"
